@@ -1,0 +1,7 @@
+{
+  "name": "UData - University Data Management Platform",
+  "description": "A production-oriented platform for managing university campuses, buildings, and rooms with role-based access control (RBAC) and OAuth2 authentication.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
