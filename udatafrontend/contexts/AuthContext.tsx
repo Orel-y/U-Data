@@ -22,7 +22,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   });
 
   useEffect(() => {
-    // only run init if there's a token in localStorage
     const initAuth = async () => {
       const token = localStorage.getItem(TOKEN_KEY);
       if (!token) {
@@ -31,29 +30,21 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       }
 
       try {
-        // apiService.auth.getMe() uses axios instance that reads token from localStorage
         const user = await apiService.auth.getMe();
         setState(prev => ({ ...prev, user, token, isAuthenticated: true, isLoading: false }));
       } catch (err) {
-        // invalid/expired token: clear it
         localStorage.removeItem(TOKEN_KEY);
         setState({ user: null, token: null, isAuthenticated: false, isLoading: false });
       }
     };
 
     initAuth();
-    // run only once on mount
   }, []);
 
   const login = async (username: string, password: string) => {
     // call login endpoint
     const res = await apiService.auth.login(username, password);
 
-    // backend may return different shapes; handle common ones:
-    // 1) { access_token: "...", token_type: "bearer" }
-    // 2) { token: "..." }
-    // 3) { token: "...", user: {...} }
-    // 4) sometimes the token is the direct string
     let accessToken: string | null = null;
 
     if (res?.access_token) accessToken = res.access_token;
@@ -65,14 +56,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       throw new Error("Login response did not include an access token");
     }
 
-    // persist token BEFORE calling getMe so interceptor attaches it
     localStorage.setItem(TOKEN_KEY, accessToken);
 
     try {
       const user = await apiService.auth.getMe();
       setState({ user, token: accessToken, isAuthenticated: true, isLoading: false });
     } catch (err) {
-      // if profile fetch fails, clear token and rethrow
       localStorage.removeItem(TOKEN_KEY);
       setState({ user: null, token: null, isAuthenticated: false, isLoading: false });
       throw err;

@@ -143,7 +143,7 @@ export const CampusesPage = () => {
             <input 
               required
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0A7FC7] outline-none"
-              placeholder="e.g. 123 University Ave"
+              placeholder="e.g. Located at the entrance of Hawassa"
               value={formData.address}
               onChange={e => setFormData({...formData, address: e.target.value})}
             />
