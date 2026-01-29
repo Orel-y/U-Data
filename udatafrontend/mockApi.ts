@@ -22,7 +22,7 @@ let MOCK_BUILDINGS: Building[] = [
 ];
 
 let MOCK_ROOMS: Room[] = [
-  { id: 'r1', building_id: 'b1', prefix: 'R', room_no: '101-A', capacity: 50, floor: 1, type: RoomType.LECTURE_HALL, status: RoomStatus.AVAILABLE },
+  { id: 'r1', building_id: 'b1', prefix: 'R', room_no: '101', capacity: 50, floor: 1, type: RoomType.LECTURE_HALL, status: RoomStatus.AVAILABLE },
   { id: 'r2', building_id: 'b1', prefix: 'R', room_no: '205', capacity: 20, floor: 2, type: RoomType.LAB, status: RoomStatus.OCCUPIED },
 ];
 

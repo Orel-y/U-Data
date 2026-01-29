@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { mockApi } from '../mockApi';
+import { apiService } from '../api/api';
+//import { mockApi } from '../mockApi';
 import { Building, Campus, Role, BuildingType, BuildingStatus } from '../types';
 import { BuildingTable } from '../components/BuildingTable';
 import { ConfirmationModal, Modal } from '../components/ConfirmationModal';
@@ -25,8 +26,8 @@ export const BuildingsPage = () => {
 
   const fetchBuildings = () => {
     if (campusId) {
-      mockApi.buildings.listByCampus(campusId).then(d => setBuildings(d));
-      mockApi.campuses.list().then(list => setCampus(list.find(c => c.id === campusId)));
+      apiService.buildings.listByCampus(campusId).then(d => setBuildings(d));
+      apiService.campuses.list().then(list => setCampus(list.find(c => c.id === campusId)));
     }
   };
 
@@ -51,7 +52,7 @@ export const BuildingsPage = () => {
     e.preventDefault();
     if (!campusId) return;
     try {
-      await mockApi.buildings.create({
+      await apiService.buildings.create({
         ...formData,
         prefix: 'B',
         campus_id: campusId
@@ -67,7 +68,7 @@ export const BuildingsPage = () => {
     e.preventDefault();
     if (!editTarget) return;
     try {
-      await mockApi.buildings.update(editTarget.id, formData);
+      await apiService.buildings.update(editTarget.id, formData);
       setEditTarget(null);
       fetchBuildings();
     } catch (err) {
@@ -78,7 +79,7 @@ export const BuildingsPage = () => {
   const handleDeleteBuilding = async () => {
     if (!deleteTarget) return;
     try {
-      await mockApi.buildings.delete(deleteTarget.id);
+      await apiService.buildings.delete(deleteTarget.id);
       setDeleteTarget(null);
       fetchBuildings();
     } catch (err) {

@@ -33,7 +33,7 @@ export const LoginPage = () => {
     setLoading(true);
     setError('');
     try {
-      await login(username);
+      await login(username, password);
       navigate('/');
     } catch (err) {
       setError('Invalid credentials for selected role');

@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { mockApi } from '../mockApi';
+import { apiService } from '../api/api'
+//import { mockApi } from '../mockApi';
 import { Campus, Role, CampusStatus } from '../types';
 import { CampusTable } from '../components/CampusTable';
 import { ConfirmationModal, Modal } from '../components/ConfirmationModal';
@@ -23,7 +24,7 @@ export const CampusesPage = () => {
 
   const fetchCampuses = () => {
     setLoading(true);
-    mockApi.campuses.list().then(d => { setCampuses(d); setLoading(false); });
+    apiService.campuses.list().then(d => { setCampuses(d); setLoading(false); });
   };
 
   useEffect(() => { 
@@ -46,7 +47,7 @@ export const CampusesPage = () => {
   const handleCreateCampus = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await mockApi.campuses.create(formData);
+      await apiService.campuses.create(formData);
       setIsAddModalOpen(false);
       fetchCampuses();
     } catch (err) {
@@ -58,7 +59,7 @@ export const CampusesPage = () => {
     e.preventDefault();
     if (!editTarget) return;
     try {
-      await mockApi.campuses.update(editTarget.id, formData);
+      await apiService.campuses.update(editTarget.id, formData);
       setEditTarget(null);
       fetchCampuses();
     } catch (err) {
@@ -69,7 +70,7 @@ export const CampusesPage = () => {
   const handleDeleteCampus = async () => {
     if (!deleteTarget) return;
     try {
-      await mockApi.campuses.delete(deleteTarget.id);
+      await apiService.campuses.delete(deleteTarget.id);
       setDeleteTarget(null);
       fetchCampuses();
     } catch (err) {

@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { mockApi } from '../mockApi';
+import { apiService } from '../api/api';
+//import { mockApi } from '../mockApi';
 import { Room, Building, Role, RoomType, RoomStatus } from '../types';
 import { RoomTable } from '../components/RoomTable';
 import { ConfirmationModal, Modal } from '../components/ConfirmationModal';
@@ -26,8 +27,8 @@ export const RoomsPage = () => {
 
   const fetchRooms = () => {
     if (buildingId) {
-      mockApi.rooms.listByBuilding(buildingId).then(d => setRooms(d));
-      mockApi.buildings.listByCampus('c1').then(list => {
+      apiService.rooms.listByBuilding(buildingId).then(d => setRooms(d));
+      apiService.buildings.listByCampus(buildingId).then(list => {
         const found = list.find(b => b.id === buildingId);
         if (found) setBuilding(found);
       });
@@ -56,7 +57,7 @@ export const RoomsPage = () => {
     e.preventDefault();
     if (!buildingId) return;
     try {
-      await mockApi.rooms.create({
+      await apiService.rooms.create({
         ...formData,
         prefix: 'R',
         building_id: buildingId
@@ -72,7 +73,7 @@ export const RoomsPage = () => {
     e.preventDefault();
     if (!editTarget) return;
     try {
-      await mockApi.rooms.update(editTarget.id, formData);
+      await apiService.rooms.update(editTarget.id, formData);
       setEditTarget(null);
       fetchRooms();
     } catch (err) {
@@ -83,7 +84,7 @@ export const RoomsPage = () => {
   const handleDeleteRoom = async () => {
     if (!deleteTarget) return;
     try {
-      await mockApi.rooms.delete(deleteTarget.id);
+      await apiService.rooms.delete(deleteTarget.id);
       setDeleteTarget(null);
       fetchRooms();
     } catch (err) {
@@ -143,7 +144,7 @@ export const RoomsPage = () => {
               <input 
                 required
                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0A7FC7] outline-none"
-                placeholder="e.g. 101-A"
+                placeholder="e.g. 101"
                 value={formData.room_no}
                 onChange={e => setFormData({...formData, room_no: e.target.value})}
               />
