@@ -48,7 +48,13 @@ export const Navbar = () => {
             className="flex items-center gap-3 hover:opacity-90 transition-opacity"
             aria-label="UData Home"
           >
-            <div className="w-10 h-10 bg-white rounded-2xl flex items-center justify-center text-[#0A7FC7] font-black text-xl shadow-lg">UD</div>
+            <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-[#0A7FC7] font-black text-xl shadow-lg">
+              <img
+                  src="/hulogo.png"
+                  alt="Hawass University"
+                  className="w-full h-full object-cover"
+                />
+            </div>
             <span className="text-xl font-black text-white tracking-tight hidden sm:inline">UData</span>
           </Link>
           

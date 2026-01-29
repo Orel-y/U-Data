@@ -8,8 +8,8 @@ export const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [roleSelection, setRoleSelection] = useState<Role>(Role.ADMIN);
-  const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('password');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -46,9 +46,9 @@ export const LoginPage = () => {
       <div className="w-full max-w-[420px]">
         <div className="bg-white rounded-[32px] sm:rounded-[48px] shadow-2xl overflow-hidden border border-gray-100 p-8 sm:p-14">
           <div className="text-center mb-6 sm:mb-10">
-            {<div className="inline-flex w-14 h-14 sm:w-20 sm:h-20 bg-[#0A7FC7] text-white rounded-2xl sm:rounded-3xl mb-4 sm:mb-8 items-center justify-center text-2xl sm:text-4xl font-black shadow-2xl shadow-[#0A7FC7]/30">
+            {<div className="inline-flex w-22 h-22 sm:w-20 sm:h-20 bg-[#0A7FC7] text-white rounded-2xl sm:rounded-3xl mb-4 sm:mb-8 items-center justify-center text-2xl sm:text-4xl font-black shadow-2xl shadow-[#0A7FC7]/30">
                <img
-                  src="../public/hulogo.png"
+                  src="/hulogo.png"
                   alt="Hawass University"
                   className="w-full h-full object-cover"
                 />

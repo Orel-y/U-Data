@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { mockApi } from '../mockApi';
+import { apiService } from '../api/api';
+//import { mockApi } from '../mockApi';
 import { User, Role, UserStatus } from '../types';
 import { DataTable } from '../components/DataTable';
 import { StatusBadge } from '../components/StatusBadge';
@@ -31,7 +32,7 @@ export const UserRegistryPage = () => {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const data = await mockApi.users.list();
+      const data = await apiService.users.list();
       setUsers(data);
     } catch (err) {
       console.error("Failed to fetch users");
@@ -72,7 +73,7 @@ export const UserRegistryPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await mockApi.users.create(formData);
+      await apiService.users.create(formData);
       setIsAddModalOpen(false);
       fetchUsers();
     } catch (err) {
@@ -91,7 +92,7 @@ export const UserRegistryPage = () => {
       const updateData = { ...formData };
       if (!updateData.password) delete (updateData as any).password;
       
-      await mockApi.users.update(editTarget.id, updateData);
+      await apiService.users.update(editTarget.id, updateData);
       setEditTarget(null);
       fetchUsers();
     } catch (err) {
@@ -104,7 +105,7 @@ export const UserRegistryPage = () => {
   const handleDeleteUser = async () => {
     if (!deleteTarget) return;
     try {
-      await mockApi.users.delete(deleteTarget.id);
+      await apiService.users.delete(deleteTarget.id);
       setDeleteTarget(null);
       fetchUsers();
     } catch (err) {
