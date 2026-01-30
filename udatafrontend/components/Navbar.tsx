@@ -88,7 +88,11 @@ export const Navbar = () => {
               </div>
             </div>
             <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-white text-[#0A7FC7] flex items-center justify-center font-black text-lg shadow-inner">
-              {user?.full_name?.charAt(0)}
+              <img
+                  src="/user.png"
+                  alt="Hawass University"
+                  className="w-full h-full object-cover"
+                />
             </div>
           </button>
           

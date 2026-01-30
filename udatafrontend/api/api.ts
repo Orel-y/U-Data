@@ -20,9 +20,9 @@ export const apiService = {
   },
 
   users: {
-    list: () => api.get<User[]>("/users").then(res => res.data),
-    create: (data: Partial<User>) => api.post<User>("/users", data).then(res => res.data),
-    update: (id: string, data: Partial<User>) => api.put<User>(`/users/${id}`, data).then(res => res.data),
+    list: () => api.get<User[]>("/auth/users").then(res => res.data),
+    create: (data: Partial<User>) => api.post<User>("/auth/register", data).then(res => res.data),
+    update: (id: string, data: Partial<User>) => api.put<User>(`/auth/user/${id}`, data).then(res => res.data),
     delete: (id: string) => api.delete(`/users/${id}`).then(res => res.data),
   },
 

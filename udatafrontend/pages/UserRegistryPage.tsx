@@ -199,7 +199,7 @@ export const UserRegistryPage = () => {
             <input 
               required
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0A7FC7] outline-none transition-all"
-              placeholder="e.g. John Doe"
+              placeholder="e.g. Zerihun Kinfe"
               value={formData.full_name}
               onChange={e => setFormData({...formData, full_name: e.target.value})}
             />
@@ -210,7 +210,7 @@ export const UserRegistryPage = () => {
               <input 
                 required
                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0A7FC7] outline-none transition-all"
-                placeholder="jdoe"
+                placeholder="zerihunk"
                 value={formData.username}
                 onChange={e => setFormData({...formData, username: e.target.value.toLowerCase().replace(/\s/g, '')})}
               />
@@ -233,7 +233,7 @@ export const UserRegistryPage = () => {
               required
               type="email"
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0A7FC7] outline-none transition-all"
-              placeholder="john@udata.edu"
+              placeholder="zerihunkinfe@hu.edu"
               value={formData.email}
               onChange={e => setFormData({...formData, email: e.target.value})}
             />
