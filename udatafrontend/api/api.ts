@@ -23,7 +23,7 @@ export const apiService = {
     list: () => api.get<User[]>("/auth/users").then(res => res.data),
     create: (data: Partial<User>) => api.post<User>("/auth/register", data).then(res => res.data),
     update: (id: string, data: Partial<User>) => api.put<User>(`/auth/user/${id}`, data).then(res => res.data),
-    delete: (id: string) => api.delete(`/users/${id}`).then(res => res.data),
+    delete: (id: string) => api.delete(`/auth/user/${id}`).then(res => res.data),
   },
 
   campuses: {
